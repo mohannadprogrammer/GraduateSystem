@@ -97,9 +97,18 @@ if(isset($_GET['subject'])){
 $q=mysqli_query($con,"SELECT * FROM exame WHERE sid='$sub' and title ='$title' " );
 $num_rows =mysqli_num_rows($q);
 $q3=mysqli_query($con,"SELECT * FROM tblstudents WHERE rollid ='$rollid'" );
-$num_student =mysqli_num_rows($q3);
+$num_student2=-1;
+while($row=mysqli_fetch_array($q3) )
+{
+    $class=$row['ClassId'];
+$q4=mysqli_query($con,"SELECT * FROM tblsubjectcombination WHERE ClassId ='$class' and SubjectId ='$sub' " );
+$num_student2 =mysqli_num_rows($q4);
 
-if($num_student===0){
+}
+
+$num_student =mysqli_num_rows($q3);
+echo $num_student2 . "kjkgygiuygiuykkkkkkkkk";
+if($num_student===0 || $num_student2===0){
     ?>
     
     <div class="alert alert-danger left-icon-alert" role="alert">
